@@ -1,0 +1,91 @@
+\documentclass{article}
+
+% Símbolos
+\usepackage{recycle}
+\usepackage{amsfonts}
+
+% Figuras
+\usepackage{graphicx}
+
+% Gráficas
+\usepackage{tikz}
+
+% Estilo Tikz
+\tikzstyle{edge}=[shorten <=2pt, shorten >=2pt,
+                  >=stealth, line width=1.1pt]
+\tikzstyle{vertex}=[circle, fill=white, draw,
+                    minimum size=5pt,
+                    inner sep=0pt, outer sep=0pt]
+
+% Márgenes
+\addtolength{\voffset}{-1cm}
+\addtolength{\hoffset}{-1.5cm}
+\addtolength{\textwidth}{3cm}
+\addtolength{\textheight}{2cm}
+
+% Encabezados y Pies de Página
+\usepackage{fancyhdr}
+% Información del Encabezado
+\lhead{Teor\'ia de Gr\'aficas II 2021-2 \\
+       Tarea 1}
+\rhead{Profesor: C\'esar Hern\'andez Cruz \\
+       Ayudante: Daniel Garc\'ia Argueta}
+% Información del Pie de Página
+\rfoot{\recycle}
+\cfoot{\vspace{-0.8cm}?`Realmente necesitas imprimir esta hoja?}
+\lfoot{\recycle}
+\pagenumbering{gobble}
+\footskip = 50pt
+% Línea del encabezado
+\renewcommand\headrulewidth{1.5pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%          Gráfica en encabezado          %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\headrule{{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+\hrule\@height\headrulewidth\@width\headwidth
+\vspace{0.1cm}
+\begin{tikzpicture}
+  \begin{scope}[scale=0.6]
+   \foreach \x in {0,2,...,24} {
+      \node [circle,draw,thick,inner sep=0,minimum size=5pt] (\x) at (\x,0){};
+   }
+   \foreach \x in {1,3,...,25} {
+      \node [circle,draw,fill=black,inner sep=0,minimum size=5pt] (\x) at (\x,0){};
+   }
+   \foreach \x/\y in {0,2,...,24} {
+     \pgfmathsetmacro\result{\x + 1}
+     \draw [->,>=stealth,shorten <=3.5pt, shorten >=3.5pt,line width=0.7pt] (\x,0) to (\result,0);
+   }
+   \foreach \x/\y in {1,3,...,23} {
+     \pgfmathsetmacro\result{\x + 1}
+     \draw [>=stealth,shorten <=4pt, shorten >=4pt,line width=0.7pt] (\x,0) to (\result,0);
+   }
+   % \node [inner sep=0,minimum size=5pt] (25.5) at (25.5,-0.05){$\cdots$};
+  \end{scope}
+\end{tikzpicture}
+\vskip-\headrulewidth
+\vskip-1.5pt}}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Estilo
+\pagestyle{fancyplain}
+
+% Macros
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+
+
+\begin{document}
+
+\begin{enumerate}
+  \item Demuestre que si $D$ es una digr\'afica, entonces su
+    condensaci\'on $D^\ast$ es ac\'iclica.
+\end{enumerate}
+\end{document}
