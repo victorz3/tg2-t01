@@ -5,6 +5,7 @@
 % Símbolos
 \usepackage{recycle}
 \usepackage{amsfonts}
+\usepackage{amsmath}
 
 % Teoremas y pruebas
 \usepackage{amsthm}
@@ -291,8 +292,76 @@
     contiene un ciclo par.
 
     \begin{proof}
-      Sea $D$ una digráfica con al menos dos núcleos $K_1$ y $K_2$.
+      Sea $D$ una digr\'afica con al menos dos n\'ucleos $K_1$ y $K_2$. Como los
+      n\'ucleos son distintos, difieren en al menos un v\'ertice. Sin p\'erdida de
+      generalidad, existe un v\'ertice $v_1$ que est\'a en $K_1$ y no en $K_2$. Como
+      $K_2$ es n\'ucleo y no tiene a $v_1$, entonces tiene a alg\'un v\'ertice $w_1$
+      que lo absorbe. $w_1$ no puede estar en $K_1$, pues $K_1$ es
+      independiente. Entonces debe haber un v\'ertice $v_2$ en $K_1$ que absorba a
+      $w_1$. Siguiendo este proceso, podemos obtener una subdigr\'afica bipartita $D'$ con
+      partici\'on $(V, W)$, donde $V = \{v_1, v_2, ..., v_i\}$ y $W = \{w_1,
+      w_2, ..., w_j\}$. Las particiones son independientes por pertenecer a
+      n\'ucleos y son ajenas por construcci\'on.
+
+      Ahora, observemos que $D'$ debe tener un ciclo. Para esto, tomemos a $P$, la
+      trayectoria m\'as larga en $D'$. Sea $P = u_1 u_2 ... u_m$. Como $u_m$
+      pertenece a alguna de las particiones, entonces debe haber un v\'ertice
+      $u_{m+1}$ en
+      la otra partici\'on que lo absorba. Si $u_{m+1}$ est\'a en $P$, entonces
+      tenemos un ciclo $u_{m+1}, u_x, u_{x+1}..., u_m, u_{m+1}$. Si no, entonces
+      tenemos una contradicci\'on, pues la trayectoria $u_1...u_mu_{m+1}$ es
+      m\'as larga que $P$. Por lo tanto, $D'$ contiene un ciclo, y como $D'
+      \subset D$, $D$ contiene un ciclo. Por \'ultimo, como $D'$ es bipartita,
+      no contine ciclos impares, por lo que el ciclo contenido es par, como quer\'iamos.
     \end{proof}
+
+  \item Sea $D$ una digr\'afica fuertemente conexa y sea $k > 1$ un entero.
+    Demuestre que si todos los ciclos de $D$ tienen longitud congruente a
+    $0$ m\'odulo $k$, entonces $V$ admite una partici\'on $V = (V_0, \dots,
+    V_{k-1})$ de tal forma que si $(u,v) \in A$, entonces existe $i \in
+    \{ 0, \dots, k-1 \}$ tal que $u \in V_i$ y $v \in V_{i+1}$ donde los
+    sub\'indices se toman m\'odulo $k$.
+
+    \begin{proof}
+      Observemos que en una digráfica fuertemente conexa, se cumple que para dos
+      vértices $u$ y $v$, están en el mismo ciclo dirigido. Esto es porque hay
+      una trayectoria dirigida de $u$ a $v$ y una trayectoria dirigida de $v$ a
+      $u$, y la unión de estas dos trayectorias nos da un camino cerrado
+      dirigido que debe contener un ciclo dirigido.
+
+      Ahora, observemos que la digráfica se puede colorear de la siguiente
+      manera: elegimos cualquier vértice $v$ y lo coloreamos de color $0$. Luego
+      coloreamos a todos sus exvecinos de color $1$, y a los exvecinos de sus
+      exvecinos de color $2, \dots$.
+
+      En general, podemos seguir este proceso en el
+      que, para un vértice de color $y$, coloreamos a sus exvecinos de color
+      $y+1 \mod k$. Hacemos esto hasta que todos los vértices en la gráfica
+      tengan un color.
+
+      Podemos realizar la coloración anterior por medio de un simple BFS. Ahora,
+      aseguramos que cada vértice en la coloración, obtiene un único color en el
+      proceso anterior. Supongamos que no es así. Sea $u$ el primer vértice que obtiene
+      dos colores a partir del BFS. Esto quiere decir que, en algún momento $u$ fue coloreado de
+      color $i$ pero uno de sus invecinos (llamémoslo $w$) tiene color $j$, donde $j \neq i-1
+      \mod k$. Pero entonces debe existir un camino $P$ desde $u$ a $w$ con la
+      sucesión de colores $i, i+1, i+2, \dots, j$. Esto es debido a cómo hicimos
+      la coloración. Observemos que al ser $u$ el primer vértice que recibe dos
+      colores, todos los vértices en el camino anterior deben ser distintos y
+      por lo tanto es una trayectoria. Pero entonces tenemos un ciclo dirigido
+      $u, v_1, v_2, \dots, v_{j-i-1}, w, u$. Este ciclo tiene longitud $j-i+1$,
+      pero como $j \neq i-1 \mod k$, entonces $j-i+1 \neq 0 \mod k$, lo cual
+      contradice la hipótesis de que los ciclos dirigidos tienen longitud
+      congruente con $0 \mod k$. Por lo tanto, no puede existir un vértice que
+      reciba dos colores y la coloración es propia.
+
+      Pero entonces, podemos partir el conjunto de vértices en $(V_0, V_1, \dots,
+      V_{k-1})$ donde $V_i$ es el conjunto de vértices de color $i$. Además, por
+      construcción se cumple que los exvecinos de los vértices en $V_i$ están en
+      $V_{i+1}$, por lo que hemos demostrado que $D$ admite la partición deseada.
+    \end{proof}
+
+    
     
   \end{enumerate}
 \end{document}
